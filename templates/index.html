@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+           div#loading  {
+                width: 128px;
+                height: 35px;
+                left: 50%;
+                display: none;
+                background: url(/static/loadingimage.gif) no-repeat;
+                cursor: wait;
+            }
+
+            div#loading1 {
+                width: 128px;
+                height: 35px;
+                left: 50%;
+                display: none;
+                background: url(/static/loadingimage.gif) no-repeat;
+                cursor: wait;
+            }
+
+               div#loading2  {
+                width: 128px;
+                height: 35px;
+                left: 50%;
+                display: none;
+                background: url(/static/loadingimage.gif) no-repeat;
+                cursor: wait;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <br>
+        <h1 align="center">  <img src="/static/logo.png" alt="Corteva">  </h1>
+
+        <form method="POST"   enctype="multipart/form-data">
+            <div class = "form-group" align = "center">
+                <p align="center"> <b>1. Choose a current season year</b><br>
+                <select name ="input_year" class="browser-default custom-select" width="150" style="width: 150px">
+                    <option name ="input_year" value={{state_year}} selected="selected">{{state_year}}</option>
+                    <option name ="input_year" value="2019">2019</option>
+                    <option name ="input_year" value="2020">2020</option>
+                    <option name ="input_year" value="2021">2021</option>
+                    <option name ="input_year" value="2022">2022</option>
+                    <option name ="input_year" value="2023">2023</option>
+                    <option name ="input_year" value="2024">2024</option>
+                    <option name ="input_year" value="2024">2024</option>
+                 </select><br>
+
+                <p align="center"> <b>2. Upload new Activity and Transaction datasets</b><br>
+                <div class = "form-group" align = "center">
+                    <input type = "file" name = "activities"/>
+                    <button  class = "btn btn-primary btn-sm" type="submit" value = "upload_activities" name = "action"> Upload Activities </button>
+                   <br>{{ state_activities }}<br>
+                </div>
+
+                <div class = "form-group" align = "center">
+                    <input type = "file" name = "transactions"/>
+                    <button   class = "btn btn-primary btn-sm" type="submit" value = "upload_transactions" name = "action">Upload Transactions </button>
+                     <br>{{ state_transactions }}<br>
+                </div>
+
+                <p align="center"><b> 3. Train a model </b>
+                <div class = "form-group" align = "center">
+                    <div id="loading1"></div>
+                    <div id="content1">
+                         <button  type= "submit" value="train" name="action" onclick="loading1();" class="btn btn-primary btn-sm" >Train the model</button>
+                    </div>
+                    <br>{{ state_train }}
+                </div>
+
+                <p align="center"><b>4. Make a prediction </b>
+                <div class = "form-group" align = "center">
+                      <div id="loading"></div>
+                      <div id="content">
+                          <button  type= "submit" value="predict" name="action" onclick="loading();" class="btn btn-primary btn-sm">Predict</button>
+                         <button type="submit"  value="get_prediction" name="action" class="btn btn-primary btn-sm" >Download Prediction results</button>
+                    </div>
+                    <br>{{ state_predict }}
+                 </div>
+                 <p align="center"><b> 5. Get Campaign Analysis Results</b>
+                 <div class = "form-group" align = "center">
+                    <div id="loading2"></div>
+                    <div id="content2">
+                         <button  type= "submit" value="campaigns" name="action" onclick="loading2();" class="btn btn-primary btn-sm" >Analyze</button>
+                         <button type="submit"  value="get_analysis" name="action" class="btn btn-primary btn-sm" >Download analysis</button>
+                    </div>
+                 </div>
+            </div>
+
+
+        </form>
+
+
+
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">// <![CDATA[
+            function loading(){
+                $("#loading").show();
+                $("#content").hide();
+            }
+            function loading1(){
+                $("#loading1").show();
+                $("#content1").hide();
+            }
+            function loading2(){
+                $("#loading2").show();
+                $("#content2").hide();
+            }
+            // ]]>
+        </script>
+    </body>
+</html>
